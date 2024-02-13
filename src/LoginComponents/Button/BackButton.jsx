@@ -9,7 +9,7 @@ function BackButton() {
                 event.preventDefault();
                 navigate(-1);
             }}>
-            <span class="material-symbols-rounded">
+            <span className="material-symbols-rounded">
                 arrow_back
             </span>
         </button>
