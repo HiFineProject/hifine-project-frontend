@@ -86,41 +86,41 @@ const SignUpPage = () => {
         <div>
           <BackButton />
         </div>
-    <div className="flex flex-col items-center justify-center p-[65px">
-      <div >
-      <h2 className="font-bold mb-2">Create your account</h2>
-        <label  htmlFor ="email" className="w-1/2 justify-items-start mb-2">E-mail address </label>
+    <div className="flex flex-col items-center justify-center h-full">
+      <div className="flex flex-col w-1/2">
+      <h2 className="flex font-bold mb-2 items-center justify-center">Create your account</h2>
+        <label htmlFor ="email" className="justify-items-start mb-2">Email:</label>
         <input
           type="email"
           id="email"
           name="email"
-          className="mb-2 w-1/2 rounded-full px-5 py-1"
+          className="items-center justify-center mb-2 rounded-full px-5 py-1"
           value={formData.email}
           onChange={handleChange}
           required
         />
         {formErrors.email && <span style={{ color: 'red' }}>{formErrors.email}</span>}
       </div>
-      <div>
-        <label htmlFor="password" className="flex flex-col w-1/2 justify-items-start mb-2">Password</label>
+      <div className="flex flex-col w-1/2">
+        <label htmlFor="password" className="justify-items-start mb-2">Password:</label>
         <input
           type="password"
           id="password"
           name="password"
-          className="mb-2 w-1/2 rounded-full px-5 py-1"
+          className="mb-2 rounded-full px-5 py-1"
           value={formData.password}
           onChange={handleChange}
           required
         />
         {formErrors.password && <span style={{ color: 'red' }}>{formErrors.password}</span>}
       </div>
-      <div>
-        <label htmlFor="confirmPassword" className="flex flex-col w-1/2 justify-items-start mb-2" >Confirm Password</label>
+      <div className="flex flex-col w-1/2">
+        <label htmlFor="confirmPassword" className="justify-items-start mb-2" >Confirm Password:</label>
         <input
           type="password"
           id="confirmPassword"
           name="confirmPassword"
-          className="mb-2 w-1/2 rounded-full px-5 py-1"
+          className="mb-2 rounded-full px-5 py-1"
           value={formData.confirmPassword}
           onChange={handleChange}
           required
@@ -139,7 +139,5 @@ const SignUpPage = () => {
     </LoginLayout>
   );
 };
-
 export default SignUpPage;
-
 

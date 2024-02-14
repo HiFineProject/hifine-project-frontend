@@ -1,5 +1,4 @@
 import BackButton from "./Button/BackButton";
-import ForgotPasswordButton from "./Button/ForgotPasswordButton";
 import LoginLayout from "./LoginLayout";
 import  axios  from "axios";
 import { useState } from "react";
@@ -58,7 +57,6 @@ function Signin() {
             <button type="submit" onClick={handleLogin} className="bg-orange-400 hover:bg-orange-500 text-white p-2 m-2 w-1/2 rounded-full hover:ring hover:ring-orange-300">
               Sign in
             </button>
-          <ForgotPasswordButton />
         </form>
       </div>
     </LoginLayout>

@@ -7,8 +7,7 @@ import Home from './Home'
 import Profile from './Profile'
 import Lists from './Lists'
 import SignIn from './LoginComponents/SignIn'
-import Signup from './LoginComponents/Signup'
-import ForgotPassword from './LoginComponents/ForgotPassword'
+import Signup from './LoginComponents/SignUp'
 import CreateProfile from './LoginComponents/CreateProfile'
 
 
@@ -30,10 +29,6 @@ const router = createBrowserRouter([
   {
     path: "/SignIn",
     element: <SignIn />,
-  },
-  {
-    path: "/ForgotPassword",
-    element: <ForgotPassword />,
   },
   {
     path: '/Home',
