@@ -65,7 +65,7 @@ const SignUpPage = () => {
       const formDataToSend = { email: formData.email, password: formData.password };
   
       const response = await axios.post(
-        'http://127.0.0.1:3000/signup'//NEED CHANGE TO RENDER
+        'https://hifine-project-backend.onrender.com/signup'//NEED CHANGE TO RENDER
         , formDataToSend);
       if (response.status === 201) {
         console.log('Form submitted successfully:', response.data);
