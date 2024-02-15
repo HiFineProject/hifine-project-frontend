@@ -33,7 +33,7 @@ const UpdateListsModal = ({ setEditModal, setReload, editedList }) => {
         dateTime,
       };
       const response = await axios.patch(
-        `http://127.0.0.1:3000/lists/${editedList._id}`,
+        `https://hifine-project-backend.onrender.com/lists/${editedList._id}`,
         updatedList
       );
 

@@ -47,7 +47,7 @@ const Lists = () => {
     console.log("Deleting list with ID:", listId); // Log the listId before sending the delete request
     try {
       const response = await axios.delete(
-        `http://127.0.0.1:3000/lists/${listId}`
+        `https://hifine-project-backend.onrender.com/lists/${listId}`
       );
       if (response.status === 200) {
         setReload(!reload);
