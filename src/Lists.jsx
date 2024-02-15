@@ -21,7 +21,7 @@ const Lists = () => {
   useEffect(() => {
     const getLists = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:3000/lists");
+        const response = await axios.get("https://hifine-project-backend.onrender.com/lists");
         if (response.status === 200 || response.status === 201) {
           const updatedLists = response.data.map((list) => ({
             ...list,
