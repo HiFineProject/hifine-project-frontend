@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 const SingUpButton = () => {
   return (
     <Link to="/Signup" className="w-full">

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import LoginLayout from "./LoginLayout";
-import ForgotPasswordButton from "./Button/ForgotPasswordButton";
+
 import SignInButton from "./Button/SignInButton";
 
 function GettingStarted() {
@@ -13,9 +13,7 @@ function GettingStarted() {
             Sign up
           </button>
         </Link>
-        <p>Already have account</p>
         <SignInButton />
-        <ForgotPasswordButton />
       </div>
     </LoginLayout>
   );
