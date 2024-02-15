@@ -7,39 +7,69 @@ import axios from "axios";
 function Home() {
   const [openModal, setOpenModal] = useState(false);
   const [reload, setReload] = useState(false);
-  const [user, setUser] = useState("");
   const [posts, setPosts] = useState([]);
+  const [media, setMedia] = useState("");
+  const [allImages, setAllImages] = useState([]);
 
   const activities = [
     { value: "walking", symbol: "directions_walk.png", text: "Walking" },
     { value: "running", symbol: "directions_run.png", text: "Running" },
     { value: "cycling", symbol: "directions_bike.png", text: "Cycling" },
     { value: "hiking", symbol: "hiking.png", text: "Hiking" },
-    { value: "skateboarding", symbol: "skateboarding.png", text: "Skateboarding" }
+    {
+      value: "skateboarding",
+      symbol: "skateboarding.png",
+      text: "Skateboarding",
+    },
   ];
 
   useEffect(() => {
-    const getData = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get("Link");
-        setPosts(response.data.posts); // Assuming response.data has a property "posts"
-        setUser(response.data.user); // Assuming response.data has a property "user"
+        const response = await axios.get("https://hifine-project-backend.onrender.com/posts");
+        if (response.status === 200) {
+          // Decode base64 images
+          const decodedPosts = response.data.posts.map((post) => {
+            return {
+              ...post,
+              media: base64ToImageSrc(post.media, "image/jpeg"),
+            };
+          });
+          setPosts(decodedPosts);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-    getData();
+    fetchData();
   }, [reload]);
 
-  const editPost = async (postId, updatedData, imageFile) => {
+  const convertBase64 = (e) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(e.target.files[0]);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+        setMedia(fileReader.result)
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const base64ToImageSrc = (base64Data, mimeType) => {
+    return `data:${mimeType};base64,${base64Data}`;
+  };
+
+  const editPost = async (postId, updatedData) => {
     try {
-      // Convert image file to base64
-      const imageBase64 = await convertImageToBase64(imageFile);
-
-      // Append the base64 image to updatedData
-      updatedData.media = imageBase64;
-
-      const response = await axios.put(`Link/${postId}`, updatedData);
+      const response = await axios.put(
+        `https://hifine-project-backend.onrender.com/posts/${postId}`,
+        updatedData
+      );
       if (response.status === 200) {
         setReload(!reload);
       }
@@ -48,22 +78,11 @@ function Home() {
     }
   };
 
-  const convertImageToBase64 = (imageFile) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(imageFile);
-      reader.onload = () => {
-        resolve(reader.result);
-      };
-      reader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  };
-
   const deletePost = async (postId) => {
     try {
-      const response = await axios.delete(`Link/${postId}`);
+      const response = await axios.delete(
+        `https://hifine-project-backend.onrender.com/posts/${postId}`
+      );
       if (response.status === 200) {
         setReload(!reload);
       }
@@ -84,24 +103,24 @@ function Home() {
           This is Modal Button
         </button>
       </div>
-      {openModal && <PostModal setOpenModal={setOpenModal} activities={activities}/>}
-      {/* {posts.length > 0 && (
-        <div>
-          {posts.map((post) => (
-            <PostCard
-              key={post.id}
-              id={post.id}
-              description={post.description}
-              distance={post.distance}
-              duration={post.duration}
-              activityType={post.activityType}
-              editPost={editPost}
-              deletePost={deletePost}
-              activities={activities}
-            />
-          ))}
-        </div>
-      )} */}
+      {openModal && (
+        <PostModal setOpenModal={setOpenModal} activities={activities} />
+      )}
+      <div>
+        {posts.map((post) => (
+          <PostCard
+            key={post.id}
+            id={post.id}
+            description={post.description}
+            duration={post.duration}
+            distance={post.distance}
+            activityType={post.activityType}
+            date={post.date}
+            editPost={() => editPost(post.id)}
+            deletePost={() => deletePost(post.id)}
+          />
+        ))}
+      </div>
     </UserLayout>
   );
 }
