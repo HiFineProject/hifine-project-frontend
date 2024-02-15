@@ -16,7 +16,7 @@ const ListsModal = ({ setOpenModal, setReload }) => {
         todoItem: { items: todoItems },
         dateTime,
       };
-      const response = await axios.post("http://127.0.0.1:3000/lists", newList);
+      const response = await axios.post("https://hifine-project-backend.onrender.com/lists", newList);
 
       if (response.status === 200 || response.status === 201) {
         console.log("List created successfully:", response.data);

@@ -32,7 +32,7 @@ const CreateProfile = () => {
             const nameDataToSend = { name:nameData.name}
         
         const response = await axios.post(
-            'http://127.0.0.1:3000/createProfile'
+            'https://hifine-project-backend.onrender.com/createProfile'
             , nameDataToSend);
           if (response.status === 201) {
             console.log('Form submitted successfully:', response.data);
