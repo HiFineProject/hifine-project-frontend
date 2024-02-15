@@ -7,7 +7,6 @@ import Profile from './Profile'
 import Lists from './Lists'
 import SignIn from './LoginComponents/SignIn'
 import SignUp from './LoginComponents/SignUp'
-import ForgotPassword from './LoginComponents/ForgotPassword'
 import CreateProfile from './LoginComponents/CreateProfile'
 
 
