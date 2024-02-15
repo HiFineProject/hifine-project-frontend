@@ -1,13 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-
 import App from './App'
 import Home from './Home'
 import Profile from './Profile'
 import Lists from './Lists'
 import SignIn from './LoginComponents/SignIn'
-import Signup from './LoginComponents/Signup'
+import SignUp from './LoginComponents/SignUp'
 import ForgotPassword from './LoginComponents/ForgotPassword'
 import CreateProfile from './LoginComponents/CreateProfile'
 
@@ -21,7 +20,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/SignUp",
-    element: <Signup />,
+    element: <SignUp />,
   },
   {
     path: "/CreateProfile",
@@ -30,10 +29,6 @@ const router = createBrowserRouter([
   {
     path: "/SignIn",
     element: <SignIn />,
-  },
-  {
-    path: "/ForgotPassword",
-    element: <ForgotPassword />,
   },
   {
     path: '/Home',

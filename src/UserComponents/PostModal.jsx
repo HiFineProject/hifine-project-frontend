@@ -10,7 +10,6 @@ const PostModal = ({ setOpenModal, activities }) => {
     activityType: "",
     media: null,
   });
-
   const [selectedActivityText, setSelectedActivityText] =
     useState("Select Activity");
 
@@ -26,6 +25,7 @@ const PostModal = ({ setOpenModal, activities }) => {
     const file = e.target.files[0];
     setFormData((prevData) => ({ ...prevData, media: file }));
   };
+
   const convertBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
@@ -45,39 +45,23 @@ const PostModal = ({ setOpenModal, activities }) => {
     let postData = { ...formData };
 
     if (formData.media) {
-        const imageBase64 = await convertBase64(formData.media);
-        postData.media = imageBase64;
+      const imageBase64 = await convertBase64(formData.media);
+      postData.media = imageBase64;
     }
-
     console.log("Sending post data:", postData);
+    try {
+      const response = await axios.post('https://hifine-project-backend.onrender.com/posts', postData);
 
-    // Retrieve token from localStorage
-    const token = localStorage.getItem('token');
-
-    if (!token) {
-        console.error("token not found in localStorage.");
-        return;
-    } else {
-        // Make Axios post request with token in headers
-        let response;
-        try {
-            response = await axios.post('http://127.0.0.1:3000/posts', postData, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-
-            if (response.status === 200 || response.status === 201) {
-                console.log("Post created successfully:", response.data);
-                setOpenModal(false); // Close modal upon successful post creation
-            } else {
-                console.error("Failed to create post. Unexpected status code:", response.status);
-            }
-        } catch (error) {
-            console.error("Error creating post:", error.message);
-        }
+      if (response.status === 200 || response.status === 201) {
+        console.log("Post created successfully:", response.data);
+        setOpenModal(false);
+      } else {
+        console.error("Failed to create post. Unexpected status code:", response.status);
+      }
+    } catch (error) {
+      console.error("Error creating post:", error.message);
     }
-};
+  };
 
   return (
     <div className="flex fixed top-0 left-0 w-full h-dvh justify-center items-center sm:mx-auto backdrop-blur-md">
@@ -171,7 +155,7 @@ const PostModal = ({ setOpenModal, activities }) => {
                   >
                     <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0 0v-560 560Zm80-80h400q12 0 18-11t-2-21L586-459q-6-8-16-8t-16 8L450-320l-74-99q-6-8-16-8t-16 8l-80 107q-8 10-2 21t18 11Z" />
                   </svg>
-                  <input type="file" onChange={uploadImage}></input>
+                  <input type="file" accept=".jpeg, .png, .jpg" onChange={uploadImage}></input>
                 </div>
               </div>
               <SelectActivityButton
