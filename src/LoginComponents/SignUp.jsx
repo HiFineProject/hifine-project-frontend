@@ -60,10 +60,10 @@ const SignUpPage = () => {
     const isEmailValid = validateEmail();
     const isPasswordValid = validatePassword();
     const isConfirmPasswordValid = validateConfirmPassword();
-    
+
     if (isEmailValid && isPasswordValid && isConfirmPasswordValid) {
       const formDataToSend = { email: formData.email, password: formData.password };
-  
+
       const response = await axios.post(
         'https://hifine-project-backend.onrender.com/signup'//NEED CHANGE TO RENDER
         , formDataToSend);
@@ -72,7 +72,7 @@ const SignUpPage = () => {
         navigate('/createProfile');
         // Additional logic after successful submission
         //navigate('/CreateProfile');
-        
+
       } else {
         console.error('Error submitting form:', response.statusText);
         // Handle error scenarios
@@ -88,13 +88,14 @@ const SignUpPage = () => {
         </div>
     <div className="flex flex-col items-center justify-center h-full">
       <div className="flex flex-col w-1/2">
-      <h2 className="flex font-bold mb-2 items-center justify-center">Create your account</h2>
-        <label htmlFor ="email" className="justify-items-start mb-2">Email:</label>
+      <h2 className="flex font-bold text-2xl mb-2 items-center justify-center text-white sm:bg-gradient-to-r sm:from-sky-500 sm:to-emerald-500 sm:text-transparent sm:bg-clip-text">Create your account</h2>
+        <label htmlFor ="email" className="justify-items-start mb-2 text-white sm:text-sky-500">E-mail :</label>
         <input
           type="email"
           id="email"
           name="email"
-          className="items-center justify-center mb-2 rounded-full px-5 py-1"
+          placeholder="you@example.com"
+          className="mb-2 rounded-full px-5 py-1 border-2 border-white-600/100 sm:border-sky-500/100 focus:outline-none"
           value={formData.email}
           onChange={handleChange}
           required
@@ -102,12 +103,13 @@ const SignUpPage = () => {
         {formErrors.email && <span style={{ color: 'red' }}>{formErrors.email}</span>}
       </div>
       <div className="flex flex-col w-1/2">
-        <label htmlFor="password" className="justify-items-start mb-2">Password:</label>
+        <label htmlFor="password" className="justify-items-start mb-2 text-white sm:text-sky-500">Password :</label>
         <input
           type="password"
           id="password"
           name="password"
-          className="mb-2 rounded-full px-5 py-1"
+          placeholder="**********"
+          className="mb-2 rounded-full px-5 py-1 border-2 border-white-600/100 sm:border-sky-500/100 focus:outline-none"
           value={formData.password}
           onChange={handleChange}
           required
@@ -115,12 +117,13 @@ const SignUpPage = () => {
         {formErrors.password && <span style={{ color: 'red' }}>{formErrors.password}</span>}
       </div>
       <div className="flex flex-col w-1/2">
-        <label htmlFor="confirmPassword" className="justify-items-start mb-2" >Confirm Password:</label>
+        <label htmlFor="confirmPassword" className="justify-items-start mb-2 text-white sm:text-sky-500">Confirm Password :</label>
         <input
           type="password"
           id="confirmPassword"
           name="confirmPassword"
-          className="mb-2 rounded-full px-5 py-1"
+          placeholder="**********"
+          className="mb-2 rounded-full px-5 py-1 border-2 border-white-600/100 sm:border-sky-500/100 focus:outline-none"
           value={formData.confirmPassword}
           onChange={handleChange}
           required
@@ -128,11 +131,12 @@ const SignUpPage = () => {
         {formErrors.confirmPassword && <span style={{ color: 'red' }}>{formErrors.confirmPassword}</span>}
       </div>
       <div className="flex flex-col items-center w-full">
-      <button onClick={handleSubmit} className="bg-orange-400 hover:bg-orange-500 text-white p-2 m-2 w-1/2 rounded-full hover:ring hover:ring-orange-300">Sign Up</button>
+      <button onClick={handleSubmit} className="text-white text-lg font-bold p-2 m-2 w-1/2 rounded-full sm:bg-gradient-to-r sm:from-pink-500 sm:to-yellow-500 sm:hover:from-yellow-500 sm:hover:to-pink-500 bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-yellow-500 hover:to-pink-500">Sign Up</button>
       </div>
       <div className="flex flex-col w-full justify-center">
-          <p className="flex flex-col items-center justify-center">Already have account</p>
+          <p className="flex flex-col items-center justify-center text-white sm:text-sky-500">Already have account</p>
           <SignInButton />
+          <img className="h-full w-full sm:w-1/2 sm:hidden absolute bottom-0 z-[-1]" src="wave-signup-mobile.png" />
           </div>
     </div>
     </div>
@@ -140,4 +144,3 @@ const SignUpPage = () => {
   );
 };
 export default SignUpPage;
-
