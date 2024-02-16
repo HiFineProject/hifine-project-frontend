@@ -61,7 +61,7 @@ const Lists = () => {
 
   return (
     <UserLayout>
-      <div className="flex justify-center sm:w-[640px] mx-auto border-2 border-black rounded-xl mt-2">
+      <div className="flex justify-center sm:w-[640px] mx-auto border-2 border-black rounded-xl mt-2 ">
         <button
           className="w-full h-full"
           onClick={() => {
@@ -81,16 +81,16 @@ const Lists = () => {
           editedList={editedList}
         />
       )}
-      <div className="grid grid-cols-3 w-[640px] mx-auto mt-5 gap-5">
+      <div className="grid grid-cols-3 w-[640px] mx-auto mt-5 gap-5 p-5 rounded-3xl  bg-yellow-400 ">
         {lists.map((list, listIndex) => (
-          <div key={list._id} className="flex flex-col border-2 p-3">
-            <div className="flex flex-col justify-center items-center">
+          <div key={list._id} className="flex flex-col border-2 p-3 m-4 rounded-3xl bg-white shadow-xl justify-end ">
+            <div className="flex flex-col items-center h-1/4">
               <h1>{list.title}</h1>
-              <div className="flex text-nowrap">
+              <div className="flex text-nowrap ">
                 <p>{list.dateTime}</p>
               </div>
             </div>
-            <ul className="flex flex-col items-center">
+            <ul className="flex flex-col items-center h-2/4">
               {list.todoItem.items.map((item, itemIndex) => (
                 <li
                   key={itemIndex}
@@ -105,11 +105,12 @@ const Lists = () => {
                 </li>
               ))}
             </ul>
-            <div className="flex justify-between">
-            <button onClick={() => handleEdit(list)}>Edit</button>
-              <button onClick={() => handleDelete(list._id)}>Delete</button>
+            <div className="flex justify-items-end flex-col h-1/4 m-4">
+            <button className="bg-orange-500 rounded-xl w-full mb-3 " onClick={() => handleEdit(list)}>Edit</button>
+              <button className="bg-red-500 rounded-xl w-full" onClick={() => handleDelete(list._id)}>Delete</button>
             </div>
           </div>
+
         ))}
       </div>
     </UserLayout>

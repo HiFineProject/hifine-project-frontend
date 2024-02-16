@@ -30,7 +30,7 @@ const CreateProfile = () => {
         const isNameValid = validateName();
         if (isNameValid) {
             const nameDataToSend = { name:nameData.name}
-        
+
         const response = await axios.post(
             'https://hifine-project-backend.onrender.com/createProfile'
             , nameDataToSend);
@@ -39,13 +39,13 @@ const CreateProfile = () => {
             navigate('/Home');
             // Additional logic after successful submission
             //navigate('/CreateProfile');
-            
+
           } else {
             console.error('Error submitting form:', response.statusText);
             // Handle error scenarios
           }
       }};
-    return (
+      return (
         <LoginLayout>
             <div className="flex flex-col items-center justify-center h-full">
                 <h2 className="font-semibold mb-2">Profile</h2>
@@ -55,8 +55,8 @@ const CreateProfile = () => {
                 type="text"
                 id="name"
                   onChange={handleChange}></input>
-               
-                <button onClick={handleSubmit} className="bg-orange-400 hover:bg-orange-500 text-white p-2 m-2 w-1/2 rounded-full hover:ring hover:ring-orange-300">Confirm</button>
+
+                <button onClick={handleSubmit} className="text-white p-2 m-2 w-1/2 rounded-full sm:bg-gradient-to-r sm:from-pink-500 sm:to-yellow-500 sm:hover:from-yellow-500 sm:hover:to-pink-500 bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-yellow-500 hover:to-pink-500">Confirm</button>
             </div>
         </LoginLayout>
     )
