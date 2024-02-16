@@ -6,9 +6,9 @@ const Navigation = () => {
 
   const HighlightLink = (type = null) => {
     let classes =
-      "flex justify-center w-full items-center rounded hover:bg-[#C0C0C0]";
+      "flex justify-center w-full items-center rounded bg-gradient-to-b hover:from-pink-500 hover:to-yellow-500";
     if (type === subpage) {
-      classes += "text-white bg-[#A9A9A9]";
+      classes += "text-white bg-gradient-to-b from-pink-500 to-yellow-500";
     } else {
       classes += " ";
     }
@@ -17,7 +17,7 @@ const Navigation = () => {
 
   return (
     <ul className="flex justify-evenly h-full">
-      <li className="flex w-1/3">
+      <li className="flex w-1/3 p-1 rounded-lg">
         <Link to="/Home" className={HighlightLink("Home")}>
           <button className="flex justify-center items-center w-full rounded">
             <svg
@@ -31,7 +31,7 @@ const Navigation = () => {
           </button>
         </Link>
       </li>
-      <li className="flex w-1/3">
+      <li className="flex w-1/3 p-1 rounded-lg">
         <Link to="/Profile" className={HighlightLink("Profile")}>
           <button className="flex justify-center items-center w-full rounded">
             <svg
@@ -45,7 +45,7 @@ const Navigation = () => {
           </button>
         </Link>
       </li>
-      <li className="flex w-1/3">
+      <li className="flex w-1/3 p-1 rounded-lg">
         <Link to="/Lists" className={HighlightLink("Lists")}>
           <button className="flex justify-center items-center w-full rounded">
             <svg
