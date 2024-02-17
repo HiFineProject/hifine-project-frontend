@@ -38,10 +38,8 @@ const PostModal = ({ setOpenModal, activities }) => {
       formDataToSend.append("image", image);
       formDataToSend.append("description", formData.description);
       formDataToSend.append("activityType", formData.activityType);
-      formDataToSend.append("duration_hour", formData.duration.hour);
-      formDataToSend.append("duration_min", formData.duration.min);
-      formDataToSend.append("distance_km", formData.distance.km);
-      formDataToSend.append("distance_m", formData.distance.m);
+      formDataToSend.append("duration", JSON.stringify(formData.duration));
+      formDataToSend.append("distance", JSON.stringify(formData.distance));
 
       const config = {
         headers: {
@@ -50,6 +48,8 @@ const PostModal = ({ setOpenModal, activities }) => {
         },
       };
 
+      console.log("Form Data before sending:", formData);
+
       const response = await axios.post(
         "http://127.0.0.1:3000/posts",
         formDataToSend,
@@ -57,7 +57,7 @@ const PostModal = ({ setOpenModal, activities }) => {
       );
 
       console.log("Response from backend:", response.data);
-      setOpenModal(false)
+      setOpenModal(false);
     } catch (error) {
       console.error("Error uploading image to backend:", error);
     }
