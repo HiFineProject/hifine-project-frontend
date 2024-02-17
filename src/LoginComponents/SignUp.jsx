@@ -27,58 +27,56 @@ const SignUpPage = () => {
     setFormErrors({ ...formErrors, [name]: '' }); // Clear previous error for the field
   };
 
-  const validateEmail = () => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!regex.test(formData.email)) {
-      setFormErrors({ ...formErrors, email: 'Invalid email address' });
-      return false;
-    }
-    return true;
-  };
+  const validateForm = () => {
+    let isValid = true;
+    const errors = {};
 
-  const validatePassword = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+        errors.email = 'Invalid email address';
+        isValid = false;
+    }
+
     if (formData.password.trim().length < 7) {
-      setFormErrors({ ...formErrors, password: 'Password must be at least 7 characters long' });
-      return false;
+        errors.password = 'Password must be at least 7 characters long';
+        isValid = false;
     }
-    return true;
-  };
 
-  const validateConfirmPassword = () => {
     if (formData.confirmPassword.trim() === '') {
-      setFormErrors({ ...formErrors, confirmPassword: 'Confirm password is required' });
-      return false;
+        errors.confirmPassword = 'Confirm password is required';
+        isValid = false;
     } else if (formData.confirmPassword !== formData.password) {
-      setFormErrors({ ...formErrors, confirmPassword: 'Passwords do not match' });
-      return false;
+        errors.confirmPassword = 'Passwords do not match';
+        isValid = false;
     }
-    return true;
-  };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const isEmailValid = validateEmail();
-    const isPasswordValid = validatePassword();
-    const isConfirmPasswordValid = validateConfirmPassword();
+    setFormErrors(errors);
+    return isValid;
+};  
 
-    if (isEmailValid && isPasswordValid && isConfirmPasswordValid) {
-      const formDataToSend = { email: formData.email, password: formData.password };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  
+  const isValid = validateForm();
 
-      const response = await axios.post(
-        'https://hifine-project-backend.onrender.com/signup'//NEED CHANGE TO RENDER
-        , formDataToSend);
+  if (isValid) {
+    const formDataToSend = { email: formData.email, password: formData.password };
+
+    try {
+      const response = await axios.post('https://hifine-project-backend.onrender.com/signup', formDataToSend);
       if (response.status === 201) {
         console.log('Form submitted successfully:', response.data);
+        localStorage.setItem('token', response.data.token);
         navigate('/createProfile');
-        // Additional logic after successful submission
-        //navigate('/CreateProfile');
-
       } else {
-        console.error('Error submitting form:', response.statusText);
-        // Handle error scenarios
+        // Handle other status codes
+        console.error('Error submitting form:', response.data);
       }
+    } catch (error) {
+      console.error('Error submitting form:', error);
     }
-  };
+  }
+};
 
   return (
     <LoginLayout>

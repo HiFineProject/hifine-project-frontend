@@ -14,7 +14,7 @@ function Signin() {
       e.preventDefault();
 
       try {
-        const response = await axios.post("https://hifine-project-backend.onrender.com/login", {
+        const response = await axios.post("https://hifine-project-backend.onrender.com/signin", {
           email,
           password,
         });
