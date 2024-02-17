@@ -13,6 +13,7 @@ const PostModal = ({ setOpenModal, activities }) => {
   const [imagePreview, setImagePreview] = useState(null);
   const [selectedActivityText, setSelectedActivityText] =
     useState("Select Activity");
+  const [isPosting, setIsPosting] = useState(false);
 
   const handleChange = (e, field, subfield = null) => {
     const { value } = e.target;
@@ -31,6 +32,8 @@ const PostModal = ({ setOpenModal, activities }) => {
   };
 
   const createPost = async (e) => {
+    if (isPosting) return; // If already posting, return early
+    setIsPosting(true) // Set posting state to true to disable the button
     try {
       const token = localStorage.getItem("token");
 
@@ -51,15 +54,17 @@ const PostModal = ({ setOpenModal, activities }) => {
       console.log("Form Data before sending:", formData);
 
       const response = await axios.post(
-        "http://127.0.0.1:3000/posts",
+        "https://hifine-project-backend.onrender.com/posts",
         formDataToSend,
         config
       );
 
       console.log("Response from backend:", response.data);
-      setOpenModal(false);
     } catch (error) {
       console.error("Error uploading image to backend:", error);
+    } finally {
+      setIsPosting(false); // Reset posting state after completion
+      setOpenModal(false);
     }
   };
 
@@ -192,11 +197,14 @@ const PostModal = ({ setOpenModal, activities }) => {
             </div>
           </div>
           <div className="flex justify-center">
-            <button
-              className="bg-orange-400 w-1/2 rounded-full p-2 m-2"
+          <button
+              className={`bg-orange-400 w-1/2 rounded-full p-2 m-2 ${
+                isPosting && "opacity-50 cursor-not-allowed" // Disable button if posting
+              }`}
               onClick={createPost}
+              disabled={isPosting} // Disable button if posting
             >
-              Post
+              {isPosting ? "Posting..." : "Post"}
             </button>
           </div>
         </div>
