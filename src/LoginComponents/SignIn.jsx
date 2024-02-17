@@ -33,7 +33,7 @@ function Signin() {
           <div>
             <BackButton />
           </div>
-          {error && <p>{error}</p>}
+        
           <form onSubmit={handleLogin} className="flex flex-col items-center justify-center h-full" >
             <h2 className="flex font-bold text-2xl mb-2 items-center justify-center bg-gradient-to-r from-sky-500 to-emerald-500 text-transparent bg-clip-text">Sign in to HiFine</h2>
             <p className="w-1/2 justify-items-start mb-2 text-sky-500">E-mail :</p>
@@ -53,7 +53,10 @@ function Signin() {
               placeholder="**********"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-            ></input>
+            >
+                
+            </input>
+            {error && <p style={{ color: 'red' }}>{error}</p>} 
               <button type="submit" onClick={handleLogin} className="text-white text-lg font-bold p-2 m-2 w-1/2 rounded-full sm:bg-gradient-to-r sm:from-pink-500 sm:to-yellow-500 sm:hover:from-yellow-500 sm:hover:to-pink-500 bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-yellow-500 hover:to-pink-500">
                 Sign in
               </button>
