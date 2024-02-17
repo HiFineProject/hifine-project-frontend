@@ -71,7 +71,7 @@ const CreateProfile = () => {
   return (
     <LoginLayout>
       <div className="flex flex-col items-center justify-center h-full">
-        <h2 className="font-semibold mb-2">Profile</h2>
+        <h2 className="font-bold text-3xl mb-2 text-sky-500 ">Profile</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="file"
@@ -84,7 +84,7 @@ const CreateProfile = () => {
           {profileImage ? (
             <label htmlFor="upload-profile">
               <img
-                className="rounded-full w-[300px] h-[300px] object-cover"
+                className="rounded-full w-[300px] h-[300px] object-cover "
                 src={URL.createObjectURL(profileImage)}
                 width="300px"
                 alt="profile"
@@ -95,16 +95,16 @@ const CreateProfile = () => {
               />
             </label>
           ) : (
-            <label htmlFor="upload-profile">
-              <img
+            <label className=" flex justify-center items-center p-5" htmlFor="upload-profile">
+              <img title="Upload Profile"
                 src="default-profile.png"
-                className="rounded-full w-[300px]"
+                className="rounded-full w-[190px] mb-5 cursor-pointer "
               />
             </label>
           )}
-          <p className="w-1/2 justify-items-start mb-2">Display :</p>
+          <p className="justify-items-start text-xl text-red-500 mb-2">Display name :</p>
           <input
-            className="mb-2 w-1/2 rounded-full px-5 py-1"
+            className=" w-full rounded-full px-5 py-2 border-2 border-red-500 flex justify-items-center mb-5"
             placeholder="Display name"
             type="text"
             id="name"
@@ -115,12 +115,14 @@ const CreateProfile = () => {
           {nameErrors.displayName && (
             <p className="text-red-500">{nameErrors.displayName}</p>
           )}
+          <div className="flex justify-center items-center ">
           <button
             type="submit"
-            className="text-white p-2 m-2 w-1/2 rounded-full sm:bg-gradient-to-r sm:from-pink-500 sm:to-yellow-500 sm:hover:from-yellow-500 sm:hover:to-pink-500 bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-yellow-500 hover:to-pink-500"
+            className=" text-white p-2  w-full rounded-full sm:bg-gradient-to-r sm:from-pink-500 sm:to-yellow-500 sm:hover:from-yellow-500 sm:hover:to-pink-500 bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-yellow-500 hover:to-pink-500"
           >
             Confirm
           </button>
+          </div>
         </form>
       </div>
     </LoginLayout>
