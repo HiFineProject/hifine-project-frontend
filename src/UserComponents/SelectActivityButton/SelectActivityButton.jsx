@@ -32,7 +32,8 @@ const SelectActivityButton = ({ setActivityType, activities, activityType }) => 
     >
        <button
       className="flex rounded-lg items-center p-3"
-      onClick={() => {
+      onClick={(e) => {
+        e.preventDefault();
         setOpenDropdown((openDropdown) => !openDropdown);
       }}
     >
@@ -42,7 +43,7 @@ const SelectActivityButton = ({ setActivityType, activities, activityType }) => 
         {activityType || "Select Activity"}
       </button>
       {openDropdown && (
-        <DropdownActivity
+        <DropdownActivity 
           setOpenDropdown={setOpenDropdown}
           setActivityType={setActivityType}
           activities={activities}
