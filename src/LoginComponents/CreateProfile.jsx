@@ -77,14 +77,30 @@ const CreateProfile = () => {
             type="file"
             accept="image/jpeg, image/jpg, image/png"
             onChange={handleImageChange}
+            style={{ display: "none" }}
+            id="upload-profile"
           />
-          {profileImage && (
-            <img
-              className="rounded-full"
-              src={URL.createObjectURL(profileImage)}
-              width="300px"
-              alt="profile"
-            />
+
+          {profileImage ? (
+            <label htmlFor="upload-profile">
+              <img
+                className="rounded-full w-[300px] h-[300px] object-cover"
+                src={URL.createObjectURL(profileImage)}
+                width="300px"
+                alt="profile"
+                onClick={() => {
+                  document.getElementById("upload-profile").value = "";
+                  setProfileImage(null);
+                }}
+              />
+            </label>
+          ) : (
+            <label htmlFor="upload-profile">
+              <img
+                src="default-profile.png"
+                className="rounded-full w-[300px]"
+              />
+            </label>
           )}
           <p className="w-1/2 justify-items-start mb-2">Display :</p>
           <input
