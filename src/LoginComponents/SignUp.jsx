@@ -63,7 +63,6 @@ const SignUpPage = () => {
       try {
         const response = await axios.post('https://hifine-project-backend.onrender.com/signup', formDataToSend);
         if (response.status === 201) {
-          console.log('Form submitted successfully:', response.data);
           localStorage.setItem('token', response.data.token);
           navigate('/createProfile');
         } else {
