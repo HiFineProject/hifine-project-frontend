@@ -16,7 +16,15 @@ const ListsModal = ({ setOpenModal, setReload }) => {
         todoItem: { items: todoItems },
         dateTime,
       };
-      const response = await axios.post("https://hifine-project-backend.onrender.com/lists", newList);
+      const token = localStorage.getItem("token");
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const response = await axios.post("https://hifine-project-backend.onrender.com/lists", newList, config);
 
       if (response.status === 200 || response.status === 201) {
         console.log("List created successfully:", response.data);
