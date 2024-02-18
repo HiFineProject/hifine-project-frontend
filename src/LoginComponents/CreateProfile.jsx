@@ -59,8 +59,6 @@ const CreateProfile = () => {
           formData,
           config
         );
-
-        console.log("Response from backend:", response.data);
         navigate("/home");
       } catch (error) {
         console.error("Error uploading image to backend:", error);
