@@ -8,8 +8,6 @@ function Home() {
   const [openModal, setOpenModal] = useState(false);
   const [reload, setReload] = useState(false);
   const [posts, setPosts] = useState([]);
-  const [media, setMedia] = useState("");
-  const [allImages, setAllImages] = useState([]);
 
   const activities = [
     { value: "walking", symbol: "directions_walk.png", text: "Walking" },
@@ -23,52 +21,51 @@ function Home() {
     },
   ];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("https://hifine-project-backend.onrender.com/posts");
-        if (response.status === 200) {
-          // Decode base64 images
-          const decodedPosts = response.data.posts.map((post) => {
-            return {
-              ...post,
-              media: base64ToImageSrc(post.media, "image/jpeg"),
-            };
-          });
-          setPosts(decodedPosts);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
+  const fetchData = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await axios.get("https://hifine-project-backend.onrender.com/posts", config);
+      if (response.status === 200) {
+        const transformedPosts = response.data.map((post) => ({
+          id: post._id.$oid,
+          userId: post.userId.$oid,
+          description: post.description,
+          duration: [post.duration.hour, post.duration.min], // Convert duration to array
+          distance: [post.distance.km, post.distance.m], // Convert distance to array
+          activityType: post.activityType,
+          image: {
+            public_id: post.image.public_id,
+            secure_url: post.image.secure_url,
+          },
+        }));
+        setPosts(transformedPosts);
       }
-    };
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
   }, [reload]);
 
-  const convertBase64 = (e) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(e.target.files[0]);
-
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-        setMedia(fileReader.result)
-      };
-
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  };
-
-  const base64ToImageSrc = (base64Data, mimeType) => {
-    return `data:${mimeType};base64,${base64Data}`;
-  };
-
   const editPost = async (postId, updatedData) => {
     try {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
       const response = await axios.put(
         `https://hifine-project-backend.onrender.com/posts/${postId}`,
-        updatedData
+        updatedData,
+        config
       );
       if (response.status === 200) {
         setReload(!reload);
@@ -80,8 +77,15 @@ function Home() {
 
   const deletePost = async (postId) => {
     try {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
       const response = await axios.delete(
-        `https://hifine-project-backend.onrender.com/posts/${postId}`
+        `https://hifine-project-backend.onrender.com/posts/${postId}`,
+        config
       );
       if (response.status === 200) {
         setReload(!reload);
@@ -109,15 +113,16 @@ function Home() {
       <div>
         {posts.map((post) => (
           <PostCard
-            key={post.id}
-            id={post.id}
+            key={post._id}
+            _id={post._id} // Change id to _id
             description={post.description}
             duration={post.duration}
             distance={post.distance}
             activityType={post.activityType}
             date={post.date}
-            editPost={() => editPost(post.id)}
-            deletePost={() => deletePost(post.id)}
+            secureUrl={post.image.secure_url}
+            editPost={() => editPost(post._id)} // Change id to _id
+            deletePost={() => deletePost(post._id)} // Change id to _id
           />
         ))}
       </div>
