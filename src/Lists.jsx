@@ -75,9 +75,10 @@ const Lists = () => {
 
   return (
     <UserLayout>
+      <div className="flex flex-col h-full bg-gradient-to-r sm:w-[640px] w-full from-sky-500 to-emerald-500 mx-auto rounded-3xl mt-2">
       <div className="flex justify-center item-center px-16">
         <button
-          className="flex justify-center font-bold text-xl p-2 sm:w-[640px] w-full rounded-xl mt-5 text-sky-500 border-2 border-sky-500/100 sm:border-sky-500/100 focus:outline-none"
+          className="flex justify-center font-bold text-xl p-2 sm:w-[640px] w-full rounded-xl mt-5 bg-white text-sky-500 border-2 border-sky-500/100 sm:border-sky-500/100 focus:outline-none"
           onClick={() => {
             setOpenModal(true);
           }}
@@ -96,7 +97,7 @@ const Lists = () => {
         />
       )}
       <div className="flex justify-center item-center px-16">
-        <div className="grid grid-cols-3 sm:w-[640px] w-full mt-5 p-5 rounded-3xl h-screen bg-gradient-to-r from-sky-500 to-emerald-500">
+        <div className="grid grid-cols-3 w-full mt-5 p-5 rounded-3xl">
           {lists.map((list, listIndex) => (
             <div
               key={list._id}
@@ -168,6 +169,7 @@ const Lists = () => {
             </div>
           ))}
         </div>
+      </div>
       </div>
     </UserLayout>
   );
