@@ -96,20 +96,20 @@ const Lists = () => {
           editedList={editedList}
         />
       )}
-      <div className="flex justify-center item-center px-16">
-        <div className="grid sm:grid-cols-3 grid-cols-1 w-full mt-5 p-5 rounded-3xl">
+      <div className="flex justify-center item-center px-10">
+      <div className="grid sm:grid-cols-2 grid-cols-1 w-full mt-5 p-5 rounded-3xl">
           {lists.map((list, listIndex) => (
             <div
               key={list._id}
-              className="flex flex-col border-2 p-3 m-2 rounded-3xl bg-white shadow-xl justify-end"
+              className="flex flex-col text-start border-2 m-2 rounded-3xl bg-white shadow-xl justify-around"
             >
               <div className="flex flex-col items-center">
-                <h1>{list.title}</h1>
+                <h2 className="font-bold text-xl bg-gradient-to-r from-sky-500 to-emerald-500 text-transparent bg-clip-text">{list.title}</h2>
                 <div className="flex text-nowrap">
-                  <p>{list.dateTime}</p>
+                  <p className="text-sky-600">{list.dateTime}</p>
                 </div>
               </div>
-              <ul className="flex flex-col items-center h-2/4 max-h-full overflow-y-auto">
+              <ul className="flex flex-col items-center h-2/4 max-h-full overflow-y-auto text-sky-500">
                 {list.todoItem.items.map((item, itemIndex) => (
                   <li
                     key={itemIndex}
