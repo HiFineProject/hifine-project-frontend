@@ -4,7 +4,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="h-[56px] flex items-center border-b-[1px] border-zinc-3 00 px-2 bg-gradient-to-b from-sky-500 to-emerald-500">
+      <div className="h-[56px] flex items-center border-b-[1px] border-zinc-3 00 px-2 drop-shadow-md">
         <div className="w-[75px]">
           <img alt="profile" />
         </div>

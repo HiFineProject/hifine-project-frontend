@@ -8,10 +8,12 @@ const PostModal = ({ setOpenModal, activities }) => {
     duration: { hour: "", min: "" },
     distance: { km: "", m: "" },
     activityType: "",
-    media: null,
   });
+  const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [selectedActivityText, setSelectedActivityText] =
     useState("Select Activity");
+  const [isPosting, setIsPosting] = useState(false);
 
   const handleChange = (e, field, subfield = null) => {
     const { value } = e.target;
@@ -21,50 +23,56 @@ const PostModal = ({ setOpenModal, activities }) => {
     }));
   };
 
-  const uploadImage = async (e) => {
+  const handleImageChange = (e) => {
     const file = e.target.files[0];
-    setFormData((prevData) => ({ ...prevData, media: file }));
-  };
-
-  const convertBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  };
-
-  const createPost = async () => {
-    let postData = { ...formData };
-
-    if (formData.media) {
-      const imageBase64 = await convertBase64(formData.media);
-      postData.media = imageBase64;
+    if (file) {
+      setImage(file);
+      setImagePreview(URL.createObjectURL(file));
     }
-    console.log("Sending post data:", postData);
-    try {
-      const response = await axios.post('https://hifine-project-backend.onrender.com/posts', postData);
+  };
 
-      if (response.status === 200 || response.status === 201) {
-        console.log("Post created successfully:", response.data);
-        setOpenModal(false);
-      } else {
-        console.error("Failed to create post. Unexpected status code:", response.status);
-      }
+  const createPost = async (e) => {
+    if (isPosting) return; // If already posting, return early
+    setIsPosting(true) // Set posting state to true to disable the button
+    try {
+      const token = localStorage.getItem("token");
+
+      const formDataToSend = new FormData();
+      formDataToSend.append("image", image);
+      formDataToSend.append("description", formData.description);
+      formDataToSend.append("activityType", formData.activityType);
+      formDataToSend.append("duration", JSON.stringify(formData.duration));
+      formDataToSend.append("distance", JSON.stringify(formData.distance));
+
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      console.log("Form Data before sending:", formData);
+
+      const response = await axios.post(
+        "https://hifine-project-backend.onrender.com/posts",
+        formDataToSend,
+        config
+      );
+
+      console.log("Response from backend:", response.data);
     } catch (error) {
-      console.error("Error creating post:", error.message);
+      console.error("Error uploading image to backend:", error);
+    } finally {
+      setIsPosting(false); // Reset posting state after completion
+      setOpenModal(false);
     }
   };
 
   return (
-    <div className="flex fixed top-0 left-0 w-full h-dvh justify-center items-center sm:mx-auto backdrop-blur-md">
+    <form
+      onSubmit={createPost}
+      className="flex fixed top-0 left-0 w-full h-dvh justify-center items-center sm:mx-auto backdrop-blur-md"
+    >
       <div className="flex flex-col sm:w-[640px] mx-auto bg-white rounded-lg p-5 border-4">
         <div className="flex justify-between mx-2 text-center items-center">
           <div className="w-[40px]"></div>
@@ -82,7 +90,7 @@ const PostModal = ({ setOpenModal, activities }) => {
             </svg>
           </button>
         </div>
-        <div className="p-2 border-black">
+        <div className="p-2 border-2 rounded mb-3">
           <textarea
             className="w-full h-[150px] p-3"
             placeholder="Share your exercise today"
@@ -90,6 +98,14 @@ const PostModal = ({ setOpenModal, activities }) => {
             onChange={(e) => handleChange(e, "description")}
             maxLength="250"
           ></textarea>
+          {imagePreview && (
+            <img
+              src={imagePreview}
+              alt="Preview"
+              className="mt-2 mx-auto"
+              style={{ maxWidth: "100%", maxHeight: "200px" }}
+            />
+          )}
         </div>
         <div className="modalFooter">
           <div className="flex flex-col">
@@ -105,7 +121,7 @@ const PostModal = ({ setOpenModal, activities }) => {
                     min="0"
                     placeholder="Hour"
                   />
-                  <p>Hr</p>
+                  <p>Hour</p>
                   <input
                     className="w-1/2"
                     type="number"
@@ -127,7 +143,7 @@ const PostModal = ({ setOpenModal, activities }) => {
                     min="0"
                     step="any"
                   />
-                  <p>km</p>
+                  <p>Kilometre</p>
                   <input
                     className="w-1/2"
                     type="number"
@@ -137,6 +153,7 @@ const PostModal = ({ setOpenModal, activities }) => {
                     min="0"
                     step="any"
                   />
+                  <p>Metre</p>
                 </div>
               </div>
               <div>
@@ -147,22 +164,30 @@ const PostModal = ({ setOpenModal, activities }) => {
               <div class="flex items-center gap-5">
                 <p>Add Picture to Your Post</p>
                 <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="40"
-                    viewBox="0 -960 960 960"
-                    width="40"
-                  >
-                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0 0v-560 560Zm80-80h400q12 0 18-11t-2-21L586-459q-6-8-16-8t-16 8L450-320l-74-99q-6-8-16-8t-16 8l-80 107q-8 10-2 21t18 11Z" />
-                  </svg>
-                  <input type="file" accept=".jpeg, .png, .jpg" onChange={uploadImage}></input>
+                  <label htmlFor="upload-image">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="40"
+                      viewBox="0 -960 960 960"
+                      width="40"
+                    >
+                      <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0 0v-560 560Zm80-80h400q12 0 18-11t-2-21L586-459q-6-8-16-8t-16 8L450-320l-74-99q-6-8-16-8t-16 8l-80 107q-8 10-2 21t18 11Z" />
+                    </svg>
+                  </label>
+                  <input
+                    type="file"
+                    accept="image/jpeg, image/jpg, image/png"
+                    onChange={handleImageChange}
+                    style={{ display: "none" }}
+                    id="upload-image"
+                  />
                 </div>
               </div>
               <SelectActivityButton
                 activities={activities}
-                activityType={selectedActivityText} // Pass selectedActivityText here
+                activityType={selectedActivityText}
                 setActivityType={(value) => {
-                  setSelectedActivityText(value); // Update selectedActivityText
+                  setSelectedActivityText(value);
                   setFormData((prevData) => ({
                     ...prevData,
                     activityType: value,
@@ -172,16 +197,19 @@ const PostModal = ({ setOpenModal, activities }) => {
             </div>
           </div>
           <div className="flex justify-center">
-            <button
-              className="bg-orange-400 w-1/2 rounded-full p-2 m-2"
+          <button
+              className={`bg-orange-400 w-1/2 rounded-full p-2 m-2 ${
+                isPosting && "opacity-50 cursor-not-allowed" // Disable button if posting
+              }`}
               onClick={createPost}
+              disabled={isPosting} // Disable button if posting
             >
-              Post
+              {isPosting ? "Posting..." : "Post"}
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

@@ -32,9 +32,16 @@ const UpdateListsModal = ({ setEditModal, setReload, editedList }) => {
         todoItem: { items: todoItems },
         dateTime,
       };
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
       const response = await axios.patch(
         `https://hifine-project-backend.onrender.com/lists/${editedList._id}`,
-        updatedList
+        updatedList,
+        config
       );
 
       if (response.status === 200 || response.status === 201) {
@@ -122,47 +129,47 @@ const UpdateListsModal = ({ setEditModal, setReload, editedList }) => {
               </li>
             ))}
           </ul>
-          <div className="flex justify-center">
-            <button
-              className="bg-blue-400 w-1/2 rounded-full p-2 m-2"
-              onClick={() => setTodoItems([...todoItems, ""])}
-            >
-              Add Item
-            </button>
-          </div>
-          <div className="flex justify-around items-center px-10">
-            <label>Date</label>
-            <input
-              className="border-2 p-2"
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-            />
-            <label>Hr</label>
-            <select
-              className="border-2 p-2"
-              value={hour}
-              onChange={(e) => setHour(e.target.value)}
-            >
-              {hourOptions.map((hour) => (
-                <option key={hour} value={hour}>
-                  {hour}
-                </option>
-              ))}
-            </select>
-            <label>Min</label>
-            <select
-              className="border-2 p-2"
-              value={minute}
-              onChange={(e) => setMinute(e.target.value)}
-            >
-              {minuteOptions.map((minute) => (
-                <option key={minute} value={minute}>
-                  {minute}
-                </option>
-              ))}
-            </select>
-          </div>
+        </div>
+        <div className="flex justify-center">
+          <button
+            className="bg-blue-400 w-1/2 rounded-full p-2 m-2"
+            onClick={() => setTodoItems([...todoItems, ""])}
+          >
+            Add Item
+          </button>
+        </div>
+        <div className="flex justify-around items-center px-10">
+          <label>Date</label>
+          <input
+            className="border-2 p-2"
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+          <label>Hr</label>
+          <select
+            className="border-2 p-2"
+            value={hour}
+            onChange={(e) => setHour(e.target.value)}
+          >
+            {hourOptions.map((hour) => (
+              <option key={hour} value={hour}>
+                {hour}
+              </option>
+            ))}
+          </select>
+          <label>Min</label>
+          <select
+            className="border-2 p-2"
+            value={minute}
+            onChange={(e) => setMinute(e.target.value)}
+          >
+            {minuteOptions.map((minute) => (
+              <option key={minute} value={minute}>
+                {minute}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="modalFooter">
           <div className="flex"></div>
