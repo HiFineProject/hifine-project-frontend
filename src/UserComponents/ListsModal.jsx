@@ -70,7 +70,7 @@ const ListsModal = ({ setOpenModal, setReload }) => {
     <div className="flex justify-center item-center">
       <div className="flex fixed top-0 left-0 w-full h-full px-16 justify-center items-center sm:mx-auto z-10 backdrop-blur-md">
         <div className="flex flex-col sm:max-w-[640px] w-full bg-white rounded-lg p-5 border-4">
-          <div className="flex justify-between pb-3 text-center">
+          <div className="flex justify-between mx-2 pb-3 text-center items-center">
             <div className="w-[25px]"></div>
             <div className="font-bold text-sky-500 text-xl">
               <h2>CREATE LIST</h2>
@@ -156,7 +156,7 @@ const ListsModal = ({ setOpenModal, setReload }) => {
             <div className="flex"></div>
             <div className="flex justify-center mt-3">
               <button
-                className="w-56 rounded-full p-2 m-2 font-bold text-white sm:bg-gradient-to-r sm:from-pink-500 sm:to-yellow-500 sm:hover:from-yellow-500 sm:hover:to-pink-500 bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-yellow-500 hover:to-pink-500"
+                className="w-56 rounded-full p-2 m-2 font-bold text-lg text-white sm:bg-gradient-to-r sm:from-pink-500 sm:to-yellow-500 sm:hover:from-yellow-500 sm:hover:to-pink-500 bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-yellow-500 hover:to-pink-500"
                 onClick={handleButtonClick}
               >
                 Add List
