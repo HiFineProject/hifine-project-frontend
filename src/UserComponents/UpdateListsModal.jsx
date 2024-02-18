@@ -122,6 +122,7 @@ const UpdateListsModal = ({ setEditModal, setReload, editedList }) => {
               </li>
             ))}
           </ul>
+          </div>
           <div className="flex justify-center">
             <button
               className="bg-blue-400 w-1/2 rounded-full p-2 m-2"
@@ -163,7 +164,6 @@ const UpdateListsModal = ({ setEditModal, setReload, editedList }) => {
               ))}
             </select>
           </div>
-        </div>
         <div className="modalFooter">
           <div className="flex"></div>
           <div className="flex justify-center">
