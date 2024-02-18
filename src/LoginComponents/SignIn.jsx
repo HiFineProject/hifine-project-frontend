@@ -20,7 +20,7 @@ function Signin() {
       });
 
       localStorage.setItem("token", response.data.token);
-      console.log("Login successful!", response.data);
+      console.log("Login successful!");
       navigate("/home");
     } catch (error) {
       setError("Invalid username or password. Please try again.");
