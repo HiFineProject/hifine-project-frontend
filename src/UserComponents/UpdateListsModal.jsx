@@ -89,11 +89,11 @@ const UpdateListsModal = ({ setEditModal, setReload, editedList }) => {
 
   return (
     <div className="flex fixed top-0 left-0 w-full h-full justify-center items-center sm:mx-auto z-10 backdrop-blur-md">
-      <div className="flex flex-col sm:w-[640px] mx-auto bg-white rounded-lg p-5 border-4">
+      <div className="flex flex-col sm:w-[640px]  mx-auto bg-white rounded-lg p-5 border-4">
         <div className="flex justify-between mx-2 pb-3 text-center items-center">
           <div className="w-[50px]"></div>
           <div>
-            <h2>Edit List</h2>
+            <h2 className="font-bold text-xl text-sky-500">EDIT LIST</h2>
           </div>
           <button onClick={() => setEditModal(false)}>
             {" "}
@@ -108,9 +108,9 @@ const UpdateListsModal = ({ setEditModal, setReload, editedList }) => {
             </svg>
           </button>
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 ">
           <input
-            className="border-2 p-3"
+            className="rounded-xl p-3 border-2 bg-sky-100 border-sky-500/100 sm:border-sky-500/100 focus:outline-none"
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -120,7 +120,7 @@ const UpdateListsModal = ({ setEditModal, setReload, editedList }) => {
             {todoItems.map((item, index) => (
               <li key={index}>
                 <input
-                  className="border-2 w-full"
+                  className="rounded-xl p-3 w-full opacity-50 border-2 border-white-600/100 sm:border-sky-500/100 focus:outline-none"
                   type="text"
                   value={item}
                   onChange={(e) => handleItemChange(index, e.target.value)}
@@ -132,7 +132,7 @@ const UpdateListsModal = ({ setEditModal, setReload, editedList }) => {
         </div>
         <div className="flex justify-center">
           <button
-            className="bg-blue-400 w-1/2 rounded-full p-2 m-2"
+            className="w-56 rounded-full p-2.5 m-2 font-bold sm:bg-gradient-to-r text-white sm:from-sky-500 sm:to-emerald-500 sm:hover:from-emerald-500 sm:hover:to-sky-500 bg-gradient-to-r from-sky-500 to-emerald-500 hover:from-emerald-500 hover:to-sky-500"
             onClick={() => setTodoItems([...todoItems, ""])}
           >
             Add Item
@@ -175,7 +175,7 @@ const UpdateListsModal = ({ setEditModal, setReload, editedList }) => {
           <div className="flex"></div>
           <div className="flex justify-center">
             <button
-              className="bg-orange-400 w-1/2 rounded-full p-2 m-2"
+              className="w-56 rounded-full p-2 m-2 font-bold text-white sm:bg-gradient-to-r sm:from-pink-500 sm:to-yellow-500 sm:hover:from-yellow-500 sm:hover:to-pink-500 bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-yellow-500 hover:to-pink-500"
               onClick={handleUpdate}
             >
               Update List

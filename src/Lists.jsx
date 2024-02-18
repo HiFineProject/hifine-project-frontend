@@ -97,7 +97,7 @@ const Lists = () => {
         />
       )}
       <div className="flex justify-center item-center px-16">
-        <div className="grid grid-cols-3 w-full mt-5 p-5 rounded-3xl">
+        <div className="grid sm:grid-cols-3 grid-cols-1 w-full mt-5 p-5 rounded-3xl">
           {lists.map((list, listIndex) => (
             <div
               key={list._id}
