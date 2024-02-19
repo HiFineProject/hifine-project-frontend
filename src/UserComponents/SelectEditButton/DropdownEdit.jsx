@@ -4,7 +4,7 @@ const liCSS =
 const DropdownEdit = ({setOpenEdit, editPost, deletePost}) => {
   return (
     <div className="shadow h-auto text-nowrap absolute">
-      <ul className="text-left">
+      <ul className="text-center">
         <li className={liCSS} onClick={() => {editPost(postId), setOpenEdit(false)}}>
           Edit
         </li>
