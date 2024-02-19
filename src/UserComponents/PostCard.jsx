@@ -1,5 +1,4 @@
 import SelectEditButton from "./SelectEditButton/SelectEditButtton";
-
 const PostCard = ({
   _id,
   displayName,
@@ -16,7 +15,7 @@ const PostCard = ({
   return (
     <div
       key={_id}
-      className="flex flex-col w-full mx-auto bg-zinc-400 rounded-lg mt-4 pt-4"
+      className="flex flex-col w-full mx-auto rounded-lg mt-4 pt-5 shadow-2xl bg-stone-100 gap-4"
     >
       <div className="flex justify-between align-baseline px-5">
         <div className="flex gap-5 items-center">
@@ -45,28 +44,31 @@ const PostCard = ({
           <SelectEditButton editPost={editPost} deletePost={deletePost} />
         </div>
       </div>
-      <div className="flex justify-center">
-        <div className="flex w-full h-96 bg-amber-500">
-          <img src={secureUrl} alt="Post Media" /> {/* Display the image */}
+      <div>
+        <div className="flex items-center justify-center w-full h-96 bg-white ">
+          <img src={secureUrl} className="h-80 rounded-xl" alt="Post Media" /> {/* Display the image */}
         </div>
       </div>
-      <div className="flex flex-col justify-center px-2 bg-lime-300">
-        <div className="flex flex-col items-center">
-          <div className="flex flex-col bg-orange-500 p-2">
+      <div className="px-2">
+        <div className="flex flex-col px-5">
+          <div className="text-slate-700 w-full h-36 p-1 gap-2 text-lg rounded-xl overflow-y-auto">
             <p>{description}</p>
           </div>
-          <div className="flex justify-center">
-            <div className="flex items-end bg-green-600 w-1/2 p-2">
-              <p className="text-5xl">{distance[0]}</p> {/* Display km */}
-              <p>kilometre</p>
-              <p className="text-5xl">{distance[1]}</p> {/* Display km */}
-              <p>metre</p>
-            </div>
-            <div className="flex items-end bg-pink-500 w-1/2 p-2">
-              <p className="text-5xl">{duration[0]}</p> {/* Display hr */}
-              <p>hr</p>
-              <p className="text-5xl">{duration[1]}</p> {/* Display hr */}
-              <p>min</p>
+          <div>
+            <div className="flex justify-center items-center pb-5">
+              <div className="flex items-end justify-center p-2 gap-2 rounded-xl">
+                <p className="text-2xl font-semibold text-slate-700">{distance[0]}</p> {/* Display km */}
+                <p className="text-md text-slate-700">km.</p>
+                <p className="text-2xl font-semibold text-slate-700">{distance[1]}</p> {/* Display km */}
+                <p className="text-md text-slate-700">m.</p>
+              </div>
+              <div className="px-5">|</div>
+              <div className="flex items-end justify-center p-2 gap-2 rounded-xl">
+                <p className="text-2xl font-semibold text-slate-700">{duration[0]}</p> {/* Display hr */}
+                <p className="text-md text-slate-700">hr</p>
+                <p className="text-2xl font-semibold text-slate-700">{duration[1]}</p> {/* Display hr */}
+                <p className="text-md text-slate-700">min</p>
+              </div>
             </div>
           </div>
         </div>
@@ -74,5 +76,4 @@ const PostCard = ({
     </div>
   );
 };
-
 export default PostCard;
