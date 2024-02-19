@@ -51,15 +51,13 @@ const PostModal = ({ setOpenModal, activities }) => {
         },
       };
 
-      console.log("Form Data before sending:", formData);
-
       const response = await axios.post(
         "https://hifine-project-backend.onrender.com/posts",
         formDataToSend,
         config
       );
 
-      console.log("Response from backend:", response.data);
+      console.log("Response from backend:");
     } catch (error) {
       console.error("Error uploading image to backend:", error);
     } finally {

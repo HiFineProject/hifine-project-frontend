@@ -50,7 +50,6 @@ const Lists = () => {
   };
 
   const handleDelete = async (listId) => {
-    console.log("Deleting list with ID:", listId); // Log the listId before sending the delete request
     const token = localStorage.getItem("token");
 
     const config = {
