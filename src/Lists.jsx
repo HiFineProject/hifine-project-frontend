@@ -75,10 +75,10 @@ const Lists = () => {
 
   return (
     <UserLayout>
-      <div className="flex flex-col h-full bg-gradient-to-r sm:w-[640px] w-full from-sky-500 to-emerald-500 mx-auto rounded-3xl mt-2">
+      <div className="flex flex-col h-full bg-gradient-to-r sm:w-[640px] w-full from-sky-500 to-emerald-500 mx-auto rounded-lg mt-2 shadow-2xl">
       <div className="flex justify-center item-center px-16">
         <button
-          className="flex justify-center font-bold text-xl p-2 sm:w-[640px] w-full rounded-xl mt-5 bg-white text-sky-500 border-2 border-sky-500/100 sm:border-sky-500/100 focus:outline-none"
+          className="flex justify-center font-bold text-xl p-2 sm:w-[640px] w-full rounded-lg mt-5 bg-white text-sky-500 border-2 border-sky-500/100 sm:border-sky-500/100 focus:outline-none"
           onClick={() => {
             setOpenModal(true);
           }}
@@ -101,10 +101,10 @@ const Lists = () => {
           {lists.map((list, listIndex) => (
             <div
               key={list._id}
-              className="flex flex-col text-start border-2 m-2 rounded-3xl bg-white shadow-xl justify-around"
+              className="flex flex-col text-start border-2 m-2 rounded-lg bg-white shadow-xl justify-around"
             >
               <div className="flex flex-col items-center">
-                <h2 className="font-bold text-xl bg-gradient-to-r from-sky-500 to-emerald-500 text-transparent bg-clip-text">{list.title}</h2>
+                <h2 className="font-bold text-xl bg-gradient-to-r from-sky-500 to-emerald-500 text-transparent bg-clip-text p-3">{list.title}</h2>
                 <div className="flex text-nowrap">
                   <p className="text-sky-600">{list.dateTime}</p>
                 </div>

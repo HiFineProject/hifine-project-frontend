@@ -43,7 +43,7 @@ const SelectActivityButton = ({ setActivityType, activities, activityType }) => 
         {activityType || "Select Activity"}
       </button>
       {openDropdown && (
-        <DropdownActivity 
+        <DropdownActivity
           setOpenDropdown={setOpenDropdown}
           setActivityType={setActivityType}
           activities={activities}
