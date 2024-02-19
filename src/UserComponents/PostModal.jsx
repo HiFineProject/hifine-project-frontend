@@ -73,7 +73,7 @@ const PostModal = ({ setOpenModal, activities }) => {
       onSubmit={createPost}
       className="flex fixed top-0 left-0 w-full h-dvh justify-center items-center sm:mx-auto backdrop-blur-md"
     >
-      <div className="flex flex-col sm:w-[640px] mx-auto bg-white rounded-lg p-5 border-4">
+      <div className="flex flex-col md:w-[640px] w-[300px] mx-auto bg-white rounded-lg p-5 border-4 ">
         <div className="flex justify-between mx-2 text-center items-center">
           <div className="w-[40px]"></div>
           <div>
@@ -110,12 +110,15 @@ const PostModal = ({ setOpenModal, activities }) => {
         </div>
         <div className="modalFooter">
           <div className="flex flex-col">
-            <div className="flex">
-              <div className="flex flex-col gap-3">
-                <div className="flex gap-3 size-fit text-sky-500 p-3">
-                  <label className="p-1">Time</label>
+            <div className="flex flex-col">
+              <div className="flex flex-col gap-2 ">
+              <label className=" text-sky-500 ml-2 ">Time</label>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center items-center text-sky-500 p-3 ">
+               
+                  <div className="flex flex-row">
+                 
                   <input
-                    className="sm:w-2/3 min-w-32 rounded-xl p-1 border-2 border-sky-200/100 sm:border-sky-200/100 focus:outline-none"
+                    className="sm:w-2/3 w-20 min-w-32 rounded-xl p-1 border-2 border-sky-200/100 sm:border-sky-200/100 focus:outline-none"
                     type="number"
                     value={formData.duration.hour}
                     onChange={(e) => handleChange(e, "duration", "hour")}
@@ -123,6 +126,8 @@ const PostModal = ({ setOpenModal, activities }) => {
                     placeholder="Hour"
                   />
                   <p className="p-1">hr</p>
+                  </div>
+                  <div className="flex flex-row">
                   <input
                     className="sm:w-2/3 min-w-32 rounded-xl p-1 border-2 border-sky-200/100 sm:border-sky-200/100 focus:outline-none"
                     type="number"
@@ -132,11 +137,13 @@ const PostModal = ({ setOpenModal, activities }) => {
                     placeholder="Minute"
                   />
                   <p className="p-1">min</p>
+                  </div>
                 </div>
-                <div className="flex gap-3 text-sky-500">
-                  <label>Distance</label>
+                <label className="text-sky-500 pl-3" >Distance</label>
+                <div className="flex flex-col gap-3 sm:flex-row text-sky-500 justify-center items-center">
+                  <div className="flex flex-row w-2/4 justify-center">
                   <input
-                    className="sm:w-2/3 min-w-32 rounded-xl p-1 border-2 border-sky-200/100 sm:border-sky-200/100 focus:outline-none"
+                    className="sm:w-2/3 w-20 min-w-32 rounded-xl p-1 border-2 border-sky-200/100 sm:border-sky-200/100 focus:outline-none"
                     type="number"
                     value={formData.distance.km}
                     onChange={(e) => handleChange(e, "distance", "km")}
@@ -145,6 +152,8 @@ const PostModal = ({ setOpenModal, activities }) => {
                     step="any"
                   />
                   <p className="p-1">km.</p>
+                  </div>
+                  <div className="flex flex-row">
                   <input
                     className="sm:w-2/3 min-w-32 rounded-xl p-1 border-2 border-sky-200/100 sm:border-sky-200/100 focus:outline-none"
                     type="number"
@@ -155,13 +164,14 @@ const PostModal = ({ setOpenModal, activities }) => {
                     step="any"
                   />
                   <p className="p-1">m.</p>
+                  </div>
                 </div>
               </div>
               <div>
                 <p></p>
               </div>
             </div>
-            <div className="flex justify-between text-sky-500">
+            <div className="flex justify-around text-sky-500 ">
               <div className="flex items-center gap-5">
                 <p>Upload Image</p>
                 <div>
