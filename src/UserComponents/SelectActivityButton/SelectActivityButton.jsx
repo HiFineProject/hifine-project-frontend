@@ -31,7 +31,7 @@ const SelectActivityButton = ({ setActivityType, activities, activityType }) => 
       }}
     >
        <button
-      className="flex rounded-lg items-center p-3"
+      className="flex rounded-lg items-center p-2 px-7"
       onClick={(e) => {
         e.preventDefault();
         setOpenDropdown((openDropdown) => !openDropdown);

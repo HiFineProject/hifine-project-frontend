@@ -83,7 +83,7 @@ const Lists = () => {
             setOpenModal(true);
           }}
         >
-          <div>Add to-do-lists</div>
+          <div>ADD TO-DO-LISTS</div>
         </button>
       </div>
       {openModal && (

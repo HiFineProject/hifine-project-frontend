@@ -90,7 +90,7 @@ const UpdateListsModal = ({ setEditModal, setReload, editedList }) => {
   return (
     <div className="flex justify-center item-center">
       <div className="flex fixed top-0 left-0 w-full h-full px-16 justify-center items-center sm:mx-auto z-10 backdrop-blur-md">
-        <div className="flex flex-col sm:w-[640px] w-full bg-white rounded-lg p-5 border-4">
+        <div className="flex flex-col sm:w-[500px] w-full bg-white rounded-lg p-5 border-4">
           <div className="flex justify-between mx-2 pb-3 text-center items-center">
             <div className="w-[50px]"></div>
             <div className="font-bold text-sky-500 text-xl">
