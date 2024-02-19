@@ -33,7 +33,7 @@ const PostModal = ({ setOpenModal, activities }) => {
 
   const createPost = async (e) => {
     if (isPosting) return; // If already posting, return early
-    setIsPosting(true) // Set posting state to true to disable the button
+    setIsPosting(true); // Set posting state to true to disable the button
     try {
       const token = localStorage.getItem("token");
 
@@ -67,9 +67,9 @@ const PostModal = ({ setOpenModal, activities }) => {
   return (
     <form
       onSubmit={createPost}
-      className="flex fixed top-0 left-0 w-full h-dvh justify-center items-center sm:mx-auto backdrop-blur-md"
+      className="flex fixed top-0 left-0 w-full h-dvh justify-center items-center sm:mx-auto px-16 backdrop-blur-md"
     >
-      <div className="flex flex-col md:w-[640px] w-[300px] mx-auto bg-white rounded-lg p-5 border-4 ">
+      <div className="flex flex-col sm:w-[640px] w-[640px] mx-auto bg-white rounded-lg p-5 border-4">
         <div className="flex justify-between mx-2 text-center items-center">
           <div className="w-[40px]"></div>
           <div>
@@ -108,58 +108,58 @@ const PostModal = ({ setOpenModal, activities }) => {
           <div className="flex flex-col">
             <div className="flex flex-col">
               <div className="flex flex-col gap-2 ">
-              <label className=" text-sky-500 ml-2 ">Time</label>
+                <label className=" text-sky-500 ml-2 ">Time</label>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center items-center text-sky-500 p-3 ">
-               
                   <div className="flex flex-row">
-                 
-                  <input
-                    className="sm:w-2/3 w-20 min-w-32 rounded-xl p-1 border-2 border-sky-200/100 sm:border-sky-200/100 focus:outline-none"
-                    type="number"
-                    value={formData.duration.hour}
-                    onChange={(e) => handleChange(e, "duration", "hour")}
-                    min="0"
-                    placeholder="Hour"
-                  />
-                  <p className="p-1">hr</p>
+                    <input
+                      className="sm:w-[100px] w-20 min-w-32 rounded-xl p-1 border-2 border-sky-200/100 sm:border-sky-200/100 focus:outline-none"
+                      type="number"
+                      value={formData.duration.hour}
+                      onChange={(e) => handleChange(e, "duration", "hour")}
+                      min="0"
+                      placeholder="Hour"
+                    />
+                    <p className="p-1">hr</p>
                   </div>
                   <div className="flex flex-row">
-                  <input
-                    className="sm:w-2/3 min-w-32 rounded-xl p-1 border-2 border-sky-200/100 sm:border-sky-200/100 focus:outline-none"
-                    type="number"
-                    value={formData.duration.min}
-                    onChange={(e) => handleChange(e, "duration", "min")}
-                    min="0"
-                    placeholder="Minute"
-                  />
-                  <p className="p-1">min</p>
+                    <input
+                      className="sm:w-[100px] w-20 min-w-32 rounded-xl p-1 border-2 border-sky-200/100 sm:border-sky-200/100 focus:outline-none"
+                      type="number"
+                      value={formData.duration.min}
+                      onChange={(e) => handleChange(e, "duration", "min")}
+                      min="0"
+                      max="59"
+                      placeholder="Minute"
+                    />
+                    <p className="p-1">min</p>
                   </div>
                 </div>
-                <label className="text-sky-500 pl-3" >Distance</label>
-                <div className="flex flex-col gap-3 sm:flex-row text-sky-500 justify-center items-center">
-                  <div className="flex flex-row w-2/4 justify-center">
-                  <input
-                    className="sm:w-2/3 w-20 min-w-32 rounded-xl p-1 border-2 border-sky-200/100 sm:border-sky-200/100 focus:outline-none"
-                    type="number"
-                    value={formData.distance.km}
-                    onChange={(e) => handleChange(e, "distance", "km")}
-                    placeholder="KiloMetre"
-                    min="0"
-                    step="any"
-                  />
-                  <p className="p-1">km.</p>
+                <label className="text-sky-500 pl-3">Distance</label>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center items-center text-sky-500 p-3 ">
+                  <div className="flex flex-row">
+                    <input
+                      className="sm:w-[100px] w-20 min-w-32 rounded-xl p-1 border-2 border-sky-200/100 sm:border-sky-200/100 focus:outline-none"
+                      type="number"
+                      value={formData.distance.km}
+                      onChange={(e) => handleChange(e, "distance", "km")}
+                      placeholder="KiloMetre"
+                      min="0"
+                      step="any"
+                    />
+                    <p className="p-1">km.</p>
                   </div>
                   <div className="flex flex-row">
-                  <input
-                    className="sm:w-2/3 min-w-32 rounded-xl p-1 border-2 border-sky-200/100 sm:border-sky-200/100 focus:outline-none"
-                    type="number"
-                    value={formData.distance.m}
-                    onChange={(e) => handleChange(e, "distance", "m")}
-                    placeholder="Metre"
-                    min="0"
-                    step="any"
-                  />
-                  <p className="p-1">m.</p>
+                    <input
+                      className="sm:w-[100px] w-20 min-w-32 rounded-xl p-1 border-2 border-sky-200/100 sm:border-sky-200/100 focus:outline-none"
+                      type="number"
+                      value={formData.distance.m}
+                      onChange={(e) => handleChange(e, "distance", "m")}
+                      placeholder="Metre"
+                      min="0"
+                      max='999'
+                      step="any"
+                    />
+                    <p className="p-1">m.</p>
                   </div>
                 </div>
               </div>
@@ -180,20 +180,26 @@ const PostModal = ({ setOpenModal, activities }) => {
                       version="1.1"
                       id="Layer_1"
                       xmlns="http://www.w3.org/2000/svg"
-
-                      viewBox="0 0 368 368">
+                      viewBox="0 0 368 368"
+                    >
                       <g>
                         <g>
                           <g>
-                            <path d="M328,32H40C18,32,0,50,0,72v224c0,22,18,40,40,40h288c22,0,40-18,40-40V72C368,50,350,32,328,32z M352,185.6l-38-38
+                            <path
+                              d="M328,32H40C18,32,0,50,0,72v224c0,22,18,40,40,40h288c22,0,40-18,40-40V72C368,50,350,32,328,32z M352,185.6l-38-38
 				c-6.4-6.4-16-6.4-22.4,0L200,238.8l-0.4-0.4L153.2,192c-6-6-16.4-6-22.4,0l-39.2,39.2c-3.2,3.2-3.2,8,0,11.2
 				c3.2,3.2,8,3.2,11.2,0l39.2-39.2l46.4,46.4l0.4,0.4l-32.4,32.4c-3.2,3.2-3.2,8,0,11.2c1.6,1.6,3.6,2.4,5.6,2.4s4-0.8,5.6-2.4
 				l135.2-134.8l47.6,47.6c0.4,0.4,1.2,0.8,1.6,1.2V296c0,13.2-10.8,24-24,24H40c-13.2,0-24-10.8-24-24V72c0-13.2,10.8-24,24-24h288
-				c13.2,0,24,10.8,24,24V185.6z"/>
-                            <path d="M72.4,250.4l-8,8c-3.2,3.2-3.2,8,0,11.2C66,271.2,68,272,70,272s4-0.8,5.6-2.4l8-8c3.2-3.2,3.2-8,0-11.2
-				C80.4,247.2,75.6,247.2,72.4,250.4z"/>
-                            <path d="M88,80c-22,0-40,18-40,40s18,40,40,40s40-18,40-40S110,80,88,80z M88,144c-13.2,0-24-10.8-24-24s10.8-24,24-24
-				s24,10.8,24,24S101.2,144,88,144z"/>
+				c13.2,0,24,10.8,24,24V185.6z"
+                            />
+                            <path
+                              d="M72.4,250.4l-8,8c-3.2,3.2-3.2,8,0,11.2C66,271.2,68,272,70,272s4-0.8,5.6-2.4l8-8c3.2-3.2,3.2-8,0-11.2
+				C80.4,247.2,75.6,247.2,72.4,250.4z"
+                            />
+                            <path
+                              d="M88,80c-22,0-40,18-40,40s18,40,40,40s40-18,40-40S110,80,88,80z M88,144c-13.2,0-24-10.8-24-24s10.8-24,24-24
+				s24,10.8,24,24S101.2,144,88,144z"
+                            />
                           </g>
                         </g>
                       </g>
@@ -223,8 +229,9 @@ const PostModal = ({ setOpenModal, activities }) => {
           </div>
           <div className="flex justify-center">
             <button
-              className={`w-56 rounded-full p-2 m-2 font-bold text-lg text-white sm:bg-gradient-to-r sm:from-pink-500 sm:to-yellow-500 sm:hover:from-yellow-500 sm:hover:to-pink-500 bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-yellow-500 hover:to-pink-500" ${isPosting && "opacity-50 cursor-not-allowed" // Disable button if posting
-                }`}
+              className={`w-56 rounded-full p-2 m-2 font-bold text-lg text-white sm:bg-gradient-to-r sm:from-pink-500 sm:to-yellow-500 sm:hover:from-yellow-500 sm:hover:to-pink-500 bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-yellow-500 hover:to-pink-500" ${
+                isPosting && "opacity-50 cursor-not-allowed" // Disable button if posting
+              }`}
               onClick={createPost}
               disabled={isPosting} // Disable button if posting
             >
