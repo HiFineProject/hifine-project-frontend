@@ -25,7 +25,6 @@ const UpdateListsModal = ({ setEditModal, setReload, editedList }) => {
 
   const handleUpdate = async () => {
     try {
-      console.log("List ID:", editedList._id);
       const dateTime = `${date} ${hour}:${minute}`;
       const updatedList = {
         title,
@@ -45,7 +44,7 @@ const UpdateListsModal = ({ setEditModal, setReload, editedList }) => {
       );
 
       if (response.status === 200 || response.status === 201) {
-        console.log("List updated successfully:", response.data);
+        console.log("List updated successfully:");
         setEditModal(false);
         setReload(true);
       } else if (response.status === 304) {
