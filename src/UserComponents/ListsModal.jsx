@@ -27,7 +27,7 @@ const ListsModal = ({ setOpenModal, setReload }) => {
       const response = await axios.post("https://hifine-project-backend.onrender.com/lists", newList, config);
 
       if (response.status === 200 || response.status === 201) {
-        console.log("List created successfully:", response.data);
+        console.log("List created successfully:");
         setOpenModal(false); // Close the modal when list is successfully created
         setReload(true);
       } else {
