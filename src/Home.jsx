@@ -118,15 +118,15 @@ function Home() {
 
   return (
     <UserLayout>
-      <div className="flex flex-col justify-center sm:w-[640px] mx-auto border-2 border-black rounded-xl mt-2">
-        <div className="">
+      <div className="flex flex-col justify-center sm:w-[640px] mx-auto rounded-xl p-5">
+        <div className="flex flex-col">
           <button
-            className="w-full h-full"
+            className="w-full h-full flex justify-center font-bold text-xl p-2 rounded-xl mt-5 bg-white text-sky-500 border-2 border-sky-500/100 sm:border-sky-500/100 focus:outline-none"
             onClick={() => {
               setOpenModal(true);
             }}
           >
-            This is Modal Button
+            CREATE ACTIVITY
           </button>
         </div>
         {openModal && (

@@ -1,6 +1,6 @@
 const DropdownActivity = ({ setOpenDropdown, setActivityType, activities }) => {
   const liCSS =
-    "flex p-3 border text-gray-700 hover:text-white hover:bg-indigo-700 cursor-pointer bg-white";
+    "flex p-3 border text-gray-700 hover:text-white hover:bg-indigo-700 cursor-pointer bg-white rounded-lg";
 
   const handleActivityClick = (activity) => {
     setOpenDropdown(false);
@@ -8,7 +8,7 @@ const DropdownActivity = ({ setOpenDropdown, setActivityType, activities }) => {
   };
 
   return (
-    <div className="shadow h-auto text-nowrap absolute z-10">
+    <div className="shadow h-auto text-wrap w-xs absolute z-10">
       <ul className="text-left">
         {activities.map((activity, index) => (
           <li
