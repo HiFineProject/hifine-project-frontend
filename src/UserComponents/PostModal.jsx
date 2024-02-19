@@ -56,8 +56,6 @@ const PostModal = ({ setOpenModal, activities }) => {
         formDataToSend,
         config
       );
-
-      console.log("Response from backend:");
     } catch (error) {
       console.error("Error uploading image to backend:", error);
     } finally {
